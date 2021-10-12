@@ -3,8 +3,11 @@
 </template>
 
 <script>
+
 export default {
-  name: "Character"
+
+  name: "Character",
+
 }
 </script>
 

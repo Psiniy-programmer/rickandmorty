@@ -22,7 +22,7 @@ export function CharacterModel(info) {
   this.name = name;
   this.species = species;
   this.image = image;
-  this.episode = episode.slice(0,5).map((ep) => ep.slice(5));
+  this.episode = episode.slice(0,5).map((ep) => ep);
 
   return this;
 }

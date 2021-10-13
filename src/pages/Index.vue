@@ -16,7 +16,8 @@ export default {
   components: {CardList},
   methods: {
     ...mapActions({
-      fetchAllCharacters: 'fetchAllCharacters'
+      fetchAllCharacters: 'characters/fetchAllCharacters',
+      fetchAllEpisode: 'episode/fetchAllEpisode'
     }),
   },
   computed: {
@@ -26,6 +27,7 @@ export default {
   },
   mounted() {
     this.fetchAllCharacters();
+    this.fetchAllEpisode();
   }
 }
 </script>

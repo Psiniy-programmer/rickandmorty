@@ -1,5 +1,5 @@
 <template>
-  <article @click="kek" class="card">
+  <article @click="changeReversal" class="card">
     <img class="card__img" :src='info.image' alt="Image">
     <div class="card__text">
       <p class="text__top_header">
@@ -11,9 +11,10 @@
       <transition name="fade">
         <div v-if="showReversal" class="text__reversal">
           <p class="reversal__content"
-             :key="ep.index"
-             v-for="ep in info.episode">
-            {{ep}}
+             v-for="ep in episodeNames"
+             :key="ep.id"
+             >
+            {{ ep.name }}
           </p>
         </div>
       </transition>
@@ -24,11 +25,14 @@
 
 <script>
 import {CharacterModel} from "@/store/Models/CharactersModel";
+import axios from "axios";
+import api from "@/utils/api";
 
 export default {
   name: "my-card",
   data: () => ({
-    showReversal: false
+    showReversal: false,
+    episodeNames: []
   }),
   props: {
     info: {
@@ -37,9 +41,23 @@ export default {
     }
   },
   methods: {
-    kek() {
+    changeReversal() {
       this.showReversal = !this.showReversal;
+    },
+    async fetchEpNames() {
+      const epsId = this.info.episode.map((epUrl) => {
+        const splitted = epUrl.split('/');
+
+        return splitted[splitted.length - 1];
+      }).join(',')
+
+      await axios.get(api.characterEpisode(epsId))
+          .then((res) => this.episodeNames = res.data)
+          .catch((err) => console.error(err))
     }
+  },
+  mounted() {
+    this.fetchEpNames();
   }
 }
 </script>
@@ -77,10 +95,13 @@ export default {
 .text__top_add {
   font-weight: 400;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.55)
+  color: rgba(0, 0, 0, 0.55);
+  padding-bottom: 10px;
 }
 
 .text__reversal {
+  border-top: var(--bg-color) 1px solid;
+  padding: 4px 0;
   background-color: var(--white-color);
   border-radius: 0 0 15px 15px;
 }

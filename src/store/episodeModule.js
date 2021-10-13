@@ -1,22 +1,19 @@
+import {EpisodeModel} from "@/store/Models/EpisodeModel";
 import axios from "axios";
 import api from "@/utils/api";
-import {CharactersModel} from "@/store/Models/CharactersModel";
 
-export const charactersModule = {
-  /**
-   * @returns {{data: {}|CharactersModel, loading: boolean, error: string}}
-   */
+export const episodeModule = {
   state: () => ({
     data: {},
     loading: false,
-    error: ''
+    error: '',
   }),
   getters: {
 
   },
   mutations: {
-    setData(state, newCharacters) {
-      state.data = new CharactersModel(newCharacters);
+    setData(state, newEpisode) {
+      state.data = new EpisodeModel(newEpisode);
     },
     setLoading(state, newLoading) {
       state.loading = newLoading;
@@ -26,19 +23,19 @@ export const charactersModule = {
     }
   },
   actions: {
-    async fetchAllCharacters({commit}) {
+    async fetchAllEpisode({commit}) {
       commit('setLoading', true);
-      await axios.get(api.characters)
+      await axios.get(api.episodes)
         .then((res) => {
           commit('setData', res.data);
         })
-        .catch((error) => {
-          commit('setError', error);
+        .catch((err) => {
+          commit('setError', err);
         })
         .finally(() => {
-          commit('setLoading', false);
+          commit('setLoading, false')
         })
-    },
+    }
   },
   namespaced: true
 }

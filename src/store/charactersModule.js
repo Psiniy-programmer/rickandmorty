@@ -12,7 +12,6 @@ export const charactersModule = {
     error: ''
   }),
   getters: {
-
   },
   mutations: {
     setData(state, newCharacters) {

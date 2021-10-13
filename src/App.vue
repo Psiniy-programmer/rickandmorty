@@ -26,6 +26,7 @@ export default {
 html{
   --bg-color: #181717;
   --white-color: #FFFFFF;
+  --green-color: #0ABAB5
 }
 
 body,

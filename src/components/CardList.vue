@@ -1,42 +1,44 @@
 <template>
-  <section class="cards" v-if="characters?.results?.length > 0">
+  <ul class="cards" v-if="items.length > 0">
     <my-card
-        v-for="character in characters.results"
+        v-for="character in items"
         :info="character"
         :key="character.id"
     >
     </my-card>
-  </section>
-  <div v-else>
-    empty list
-  </div>
+  </ul>
+  <p class="text" v-else>
+    List is empty
+  </p>
+
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
 import MyCard from "@/components/Card";
 
 export default {
   name: "CardList",
   components: {MyCard},
-  methods: {
-    ...mapActions({
-      fetchAllCharacters: 'fetchAllCharacters'
-    }),
-  },
-  computed: {
-    ...mapState({
-      characters: state => state.characters.data
-    })
-  },
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  }
 }
 </script>
 
 <style scoped>
 .cards {
+  list-style-type: none;
   margin: 0 auto;
+  padding: 0;
   max-width: 240px;
   display: grid;
   gap: 24px;
+}
+
+.text {
+  color: var(--white-color);
 }
 </style>

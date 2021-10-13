@@ -33,7 +33,7 @@ export const episodeModule = {
           commit('setError', err);
         })
         .finally(() => {
-          commit('setLoading, false')
+          commit('setLoading', false);
         })
     }
   },

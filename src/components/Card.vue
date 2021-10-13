@@ -1,5 +1,5 @@
 <template>
-  <article @click="changeReversal" class="card">
+  <li @click="changeReversal" class="card">
     <img class="card__img" :src='info.image' alt="Image">
     <div class="card__text">
       <p class="text__top_header">
@@ -20,7 +20,7 @@
       </transition>
     </div>
 
-  </article>
+  </li>
 </template>
 
 <script>

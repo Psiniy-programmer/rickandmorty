@@ -5,6 +5,7 @@
  *    name: string,
  *    id: number,
  *    species: string,
+ *    status: ('Alive'|'Dead'|'Unknown')
  *    episode: string[]
  *   }
  * } CharacterModel
@@ -17,12 +18,13 @@
  * @returns {CharacterModel}
  */
 export function CharacterModel(info) {
-  const {id, name, species, image, episode} = info;
+  const {id, name, species, image, episode, status} = info;
   this.id = id;
   this.name = name;
   this.species = species;
   this.image = image;
   this.episode = episode.slice(0,5).map((ep) => ep);
+  this.status = status;
 
   return this;
 }

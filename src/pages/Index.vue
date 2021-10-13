@@ -8,7 +8,7 @@
 
     </my-select>
   </form>
-  <main>
+  <main v-if="!episodes">
     <section v-if="!searchVal">
       <card-list :items="characters?.data?.results"></card-list>
       <div v-intersection="fetchMoreCharacters" class="observer"/>
@@ -67,7 +67,8 @@ export default {
   },
   computed: {
     ...mapState({
-      characters: state => state.characters
+      characters: state => state.characters,
+      episodes: state => state.episode.loading
     })
   },
   watch: {
@@ -87,6 +88,12 @@ export default {
   justify-content: space-between;
   margin-bottom: 24px;
   padding: 18px 6px 0 6px;
+}
+
+@media (min-width: 768px) {
+  .search {
+    justify-content: center;
+  }
 }
 
 .observer {

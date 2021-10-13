@@ -5,7 +5,10 @@ const api = {
     episode: (eps) => `https://rickandmortyapi.com/api/episode/${eps}`,
   },
   locations: "https://rickandmortyapi.com/api/location",
-  episode: (id) => `https://rickandmortyapi.com/api/episode/${id}`,
+  episode: {
+    all: 'https://rickandmortyapi.com/api/episode',
+    single: (id) => `https://rickandmortyapi.com/api/episode/${id}`
+  },
 }
 
 export default api;

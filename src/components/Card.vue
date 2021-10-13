@@ -26,8 +26,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import api from "@/utils/api";
+import {mapState} from "vuex";
 import paths from "@/router/paths";
 
 export default {
@@ -42,6 +41,11 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapState({
+      episodes: state => state.episode.data.results
+    }),
+  },
   methods: {
     firstCard() {
       return this.showReversal = this.info.id === 1
@@ -49,39 +53,19 @@ export default {
     changeReversal() {
       this.showReversal = !this.showReversal;
     },
-    async fetchEpNames() {
-      const epsId = this.info.episode.map((epUrl) => epUrl.split('/').pop()).join(',')
+    getEpNames() {
+      const epsId = this.info.episode.map((epUrl) => epUrl.split('/').pop());
 
-      await axios.get(api.characters.episode(epsId))
-          .then((res) => {
-
-            if (Array.isArray(res.data)) {
-              this.episodeNames = res.data.map((ep) => ({
-                url: paths.episode.link(ep.id),
-                name: ep.name,
-                id: ep.id
-              }))
-            } else {
-              this.episodeNames = [
-                {
-                  url: paths.episode.link(res.data.id),
-                  name: res.data.name,
-                  id: res.data.id
-                }
-              ]
-            }
-
-
-          })
-          .catch((err) => {
-            console.log(err)
-            this.episodeNames = []
-          })
+      return this.episodeNames = epsId.map((ep) => ({
+        url: paths.episode.link(this.episodes[ep].id),
+        name: this.episodes[ep].name,
+        id: this.episodes[ep].id
+      }))
     }
   },
   mounted() {
     this.firstCard();
-    this.fetchEpNames();
+    this.getEpNames();
   }
 }
 </script>

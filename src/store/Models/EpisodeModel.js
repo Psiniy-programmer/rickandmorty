@@ -19,7 +19,8 @@ export function EpisodeModel(data) {
    next,
    prev
   };
-  this.results = data.results.map((ep) => new oneEpisodeModel(ep));
+  this.results = {};
 
+  data.results.map((ep) => this.results[ep.id] = new oneEpisodeModel(ep));
   return this;
 }

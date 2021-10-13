@@ -37,7 +37,6 @@ export const charactersModule = {
         })
     },
     async fetchMoreCharacters({state, commit}) {
-      console.log('start')
       commit('setLoading', true);
 
       if (state.data?.info?.next) {

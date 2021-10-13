@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     async fetchEpisode() {
-      await axios.get(api.episode(this.id))
+      await axios.get(api.episode.single(this.id))
           .then((res) => this.episode = new oneEpisodeModel(res.data))
           .catch(() => this.episode = {})
     }

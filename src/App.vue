@@ -4,18 +4,24 @@
 
 <script>
 
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: 'App',
+  computed: {
+    ...mapState({
+      episode: state => state.episode.data,
+
+    })
+  },
   methods: {
     ...mapActions({
       fetchAllCharacters: 'characters/fetchAllCharacters',
-      fetchAllEpisode: 'episode/fetchAllEpisode',
+      fetchAllEpisodes: 'episode/fetchAllEpisodes',
     }),
   },
   mounted() {
-    this.fetchAllEpisode();
+    this.fetchAllEpisodes();
     this.fetchAllCharacters();
   }
 }

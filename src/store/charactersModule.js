@@ -11,8 +11,6 @@ export const charactersModule = {
     loading: false,
     error: ''
   }),
-  getters: {
-  },
   mutations: {
     setData(state, newCharacters) {
       state.data = new CharactersModel(newCharacters);
@@ -39,9 +37,10 @@ export const charactersModule = {
         })
     },
     async fetchMoreCharacters({state, commit}) {
+      console.log('start')
       commit('setLoading', true);
 
-      if (state.data?.info.next) {
+      if (state.data?.info?.next) {
         await axios.get(state.data.info.next)
           .then((res) => {
             const obj = {

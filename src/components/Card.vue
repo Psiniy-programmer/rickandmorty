@@ -42,9 +42,6 @@ export default {
       required: true
     }
   },
-  computed: {
-
-  },
   methods: {
     firstCard() {
       return this.showReversal = this.info.id === 1
@@ -53,11 +50,7 @@ export default {
       this.showReversal = !this.showReversal;
     },
     async fetchEpNames() {
-      const epsId = this.info.episode.map((epUrl) => {
-        const splitted = epUrl.split('/');
-
-        return splitted[splitted.length - 1];
-      }).join(',')
+      const epsId = this.info.episode.map((epUrl) => epUrl.split('/').pop()).join(',')
 
       await axios.get(api.characters.episode(epsId))
           .then((res) => {

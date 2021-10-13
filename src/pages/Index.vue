@@ -52,8 +52,6 @@ export default {
   }),
   methods: {
     ...mapActions({
-      fetchAllCharacters: 'characters/fetchAllCharacters',
-      fetchAllEpisode: 'episode/fetchAllEpisode',
       fetchMoreCharacters: 'characters/fetchMoreCharacters'
     }),
     async fetchWithQuery() {
@@ -79,10 +77,6 @@ export default {
     statusSelectVal() {
       this.fetchWithQuery();
     }
-  },
-  mounted() {
-    this.fetchAllCharacters();
-    this.fetchAllEpisode();
   }
 }
 </script>
@@ -93,5 +87,10 @@ export default {
   justify-content: space-between;
   margin-bottom: 24px;
   padding: 18px 6px 0 6px;
+}
+
+.observer {
+  height: 1px;
+  background-color: inherit;
 }
 </style>

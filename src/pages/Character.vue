@@ -1,19 +1,17 @@
 <template>
-  <main class="container">
-    <section v-if="Object.keys(character).length > 0" class="character">
-      <h1 class="character__header">
-        Name: {{ character.name }}
-      </h1>
-      <p class="character__race">
-        Race: {{ character.species }}
-      </p>
-      <img class="character__img" :src="character.image" alt="avatar">
-      <p class="character__location">
-        Location:
-        <span class="location__underline"> {{ character.location.name }}</span>
-      </p>
-    </section>
-  </main>
+  <Container v-if="isLoaded">
+    <h1 class="character__header">
+      Name: {{ character.name }}
+    </h1>
+    <p class="character__race">
+      Race: {{ character.species }}
+    </p>
+    <img class="character__img" :src="character.image" alt="avatar">
+    <p class="character__location">
+      Location:
+      <span class="location__underline"> {{ character.location.name }}</span>
+    </p>
+  </Container>
 </template>
 
 <script>
@@ -21,9 +19,11 @@
 import axios from "axios";
 import api from "@/utils/api";
 import {CharacterModel} from "@/store/Models/CharactersModel";
+import Container from "@/components/Container";
 
 export default {
   name: "Character",
+  components: {Container},
   data: () => ({
     character: {}
   }),
@@ -31,6 +31,11 @@ export default {
     id: {
       type: Number,
       required: true
+    }
+  },
+  computed: {
+    isLoaded() {
+      return Object.keys(this.character).length > 0;
     }
   },
   methods: {

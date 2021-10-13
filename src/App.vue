@@ -4,8 +4,20 @@
 
 <script>
 
+import {mapActions} from "vuex";
+
 export default {
   name: 'App',
+  methods: {
+    ...mapActions({
+      fetchAllCharacters: 'characters/fetchAllCharacters',
+      fetchAllEpisode: 'episode/fetchAllEpisode',
+    }),
+  },
+  mounted() {
+    this.fetchAllEpisode();
+    this.fetchAllCharacters();
+  }
 }
 </script>
 

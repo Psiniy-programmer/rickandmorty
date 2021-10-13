@@ -17,6 +17,7 @@ const routes = [
   {
     path: paths.episode.url,
     component: Episode,
+    props: true
   }
 ];
 

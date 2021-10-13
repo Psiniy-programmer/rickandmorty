@@ -5,8 +5,9 @@
  *    name: string,
  *    id: number,
  *    species: string,
- *    status: ('Alive'|'Dead'|'Unknown')
- *    episode: string[]
+ *    status: ('Alive'|'Dead'|'Unknown'),
+ *    episode: string[],
+ *    location: string
  *   }
  * } CharacterModel
  */
@@ -20,13 +21,14 @@ import paths from "@/router/paths";
  * @returns {CharacterModel}
  */
 export function CharacterModel(info) {
-  const {id, name, species, image, episode, status} = info;
+  const {id, name, species, image, episode, status, location} = info;
   this.id = id;
   this.name = name;
   this.species = species;
   this.image = image;
   this.episode = episode.slice(0, 5);
   this.status = status;
+  this.location = location;
   this.url = paths.character.link(id);
 
   return this;

@@ -16,7 +16,7 @@
               :key="ep.id"
               :to="ep.url"
           >
-              {{ ep.name }}
+            {{ ep.name }}
           </router-link>
         </div>
       </transition>
@@ -42,7 +42,13 @@ export default {
       required: true
     }
   },
+  computed: {
+
+  },
   methods: {
+    firstCard() {
+      return this.showReversal = this.info.id === 1
+    },
     changeReversal() {
       this.showReversal = !this.showReversal;
     },
@@ -81,6 +87,7 @@ export default {
     }
   },
   mounted() {
+    this.firstCard();
     this.fetchEpNames();
   }
 }

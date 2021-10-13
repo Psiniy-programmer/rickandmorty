@@ -21,20 +21,25 @@ export default {
 
 * {
   font-family: "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 html{
   --bg-color: #181717;
   --white-color: #FFFFFF;
-  --green-color: #0ABAB5
+  --green-color: #0ABAB5;
+  --border-radius: 15px;
+  height: 100%
 }
 
-body,
+body {
+  min-height: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+}
+
 #app {
   height: 100%;
-}
-
-#app {
-  background-color: var(--bg-color);
 }
 </style>

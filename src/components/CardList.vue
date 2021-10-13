@@ -35,7 +35,7 @@ export default {
 <style scoped>
 .cards {
   margin: 0 auto;
-  max-width: 200px;
+  max-width: 240px;
   display: grid;
   gap: 24px;
 }

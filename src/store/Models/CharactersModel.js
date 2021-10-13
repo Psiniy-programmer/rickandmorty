@@ -4,7 +4,8 @@
  *    image: string,
  *    name: string,
  *    id: number,
- *    species: string
+ *    species: string,
+ *    episode: string[]
  *   }
  * } CharacterModel
  */
@@ -16,11 +17,12 @@
  * @returns {CharacterModel}
  */
 export function CharacterModel(info) {
-  const {id, name, species, image} = info;
+  const {id, name, species, image, episode} = info;
   this.id = id;
   this.name = name;
   this.species = species;
   this.image = image;
+  this.episode = episode.slice(0,5).map((ep) => ep.slice(5));
 
   return this;
 }

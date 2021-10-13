@@ -16,9 +16,6 @@
       <card-list :items="searchResult"></card-list>
     </section>
   </main>
-<!--  <div v-else>-->
-<!--    loading-->
-<!--  </div>-->
 </template>
 
 <script>

@@ -1,7 +1,13 @@
 const paths = {
   index: '/',
-  character: '/character/:id',
-  episode: '/episode/:id'
+  character: {
+    url: '/character/:id',
+    link: (id) => `/character/${id}`
+  },
+  episode: {
+    url: '/episode/:id',
+    link: (id) => `/episode/${id}`
+  }
 }
 
 export default paths;

@@ -10,11 +10,11 @@ const routes = [
     component: Index
   },
   {
-    path: paths.character,
+    path: paths.character.url,
     component: Character
   },
   {
-    path: paths.episode,
+    path: paths.episode.url,
     component: Episode
   }
 ];

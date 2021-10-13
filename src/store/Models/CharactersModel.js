@@ -11,6 +11,8 @@
  * } CharacterModel
  */
 
+import paths from "@/router/paths";
+
 /**
  * Модель ОДНОГО персонажа, прим. https://rickandmortyapi.com/api/character/1
  * @type {CharacterModel}
@@ -25,6 +27,7 @@ export function CharacterModel(info) {
   this.image = image;
   this.episode = episode.slice(0,5).map((ep) => ep);
   this.status = status;
+  this.url = paths.character.link(id);
 
   return this;
 }

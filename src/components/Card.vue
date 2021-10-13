@@ -2,20 +2,22 @@
   <li @click="changeReversal" class="card">
     <img class="card__img" :src='info.image' alt="Image">
     <div class="card__text">
-      <p class="text__top_header">
+      <router-link :to="info.url" class="text__top_header">
         {{ info.name }}
-      </p>
+      </router-link>
       <p class="text__top_add">
         Race: {{ info.species }}
       </p>
       <transition name="fade">
         <div v-if="showReversal" class="text__reversal">
-          <p class="reversal__content"
-             v-for="ep in episodeNames"
-             :key="ep.id"
-             >
-            {{ ep.name }}
-          </p>
+          <router-link
+              class="reversal__content"
+              v-for="ep in episodeNames"
+              :key="ep.id"
+              :to="ep.url"
+          >
+              {{ ep.name }}
+          </router-link>
         </div>
       </transition>
     </div>
@@ -24,9 +26,9 @@
 </template>
 
 <script>
-import {CharacterModel} from "@/store/Models/CharactersModel";
 import axios from "axios";
 import api from "@/utils/api";
+import paths from "@/router/paths";
 
 export default {
   name: "my-card",
@@ -36,7 +38,7 @@ export default {
   }),
   props: {
     info: {
-      type: CharacterModel,
+      type: Object,
       required: true
     }
   },
@@ -52,8 +54,12 @@ export default {
       }).join(',')
 
       await axios.get(api.characterEpisode(epsId))
-          .then((res) => this.episodeNames = res.data)
-          .catch((err) => console.error(err))
+          .then((res) => this.episodeNames = res.data.map((ep) => ({
+            url: paths.episode.link(ep.id),
+            name: ep.name,
+            id: ep.id
+          })))
+          .catch(() => this.episodeNames = [])
     }
   },
   mounted() {
@@ -63,6 +69,11 @@ export default {
 </script>
 
 <style scoped>
+
+a {
+  text-decoration: none;
+}
+
 .card {
   background-color: var(--white-color);
   border-radius: 15px;
@@ -87,6 +98,7 @@ export default {
 }
 
 .text__top_header {
+  color: var(--bg-color);
   font-weight: 500;
   font-size: 18px;
   white-space: nowrap;
@@ -100,6 +112,7 @@ export default {
 }
 
 .text__reversal {
+  display: grid;
   border-top: var(--bg-color) 1px solid;
   padding: 4px 0;
   background-color: var(--white-color);
@@ -107,6 +120,7 @@ export default {
 }
 
 .reversal__content {
+  color: var(--bg-color);
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;

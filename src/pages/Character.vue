@@ -52,24 +52,6 @@ export default {
 
 <style scoped>
 
-.container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.character {
-  border-radius: var(--border-radius);
-  max-width: 280px;
-  margin: auto;
-  padding: 16px;
-  background-color: var(--white-color);
-  color: var(--bg-color);
-  display: flex;
-  flex-direction: column;
-}
-
 .character__header {
   margin: 0;
   text-align: center;

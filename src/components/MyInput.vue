@@ -25,7 +25,7 @@ export default {
     transition: border-color 0.5s linear;
     color: var(--white-color);
     padding: 6px;
-    background-color: inherit;
+    background-color: var(--bg-color);
     border-right: inherit;
     border-top: inherit;
     border-left: inherit;

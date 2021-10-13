@@ -1,3 +1,4 @@
+import paths from "@/router/paths";
 /**
  * @typedef {
  *   {
@@ -11,8 +12,6 @@
  *   }
  * } CharacterModel
  */
-
-import paths from "@/router/paths";
 
 /**
  * Модель ОДНОГО персонажа, прим. https://rickandmortyapi.com/api/character/1

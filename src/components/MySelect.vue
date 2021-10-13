@@ -36,7 +36,7 @@ export default {
 .select {
   padding: 6px;
   border: 1px solid var(--green-color);
-  background-color: inherit;
+  background-color: var(--bg-color);
   color: var(--white-color);
   outline: none;
 }

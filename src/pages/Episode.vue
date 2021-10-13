@@ -23,7 +23,7 @@
 <script>
 import axios from "axios";
 import api from "@/utils/api";
-import {oneEpisodeModel} from "@/store/Models/EpisodeModel";
+import {OneEpisodeModel} from "@/store/Models/EpisodeModel";
 import Container from "@/components/Container";
 import {mapState} from "vuex";
 import RoundImage from "@/components/roundImage";
@@ -62,7 +62,7 @@ export default {
   methods: {
     async fetchEpisode() {
       await axios.get(api.episode.single(this.id))
-          .then((res) => this.episode = new oneEpisodeModel(res.data))
+          .then((res) => this.episode = new OneEpisodeModel(res.data))
           .catch(() => this.episode = {})
     }
   },

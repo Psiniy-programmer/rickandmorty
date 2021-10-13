@@ -54,10 +54,11 @@ html{
 body {
   min-height: 100%;
   height: 100%;
-  background-color: var(--bg-color);
 }
 
 #app {
-  height: 100%;
+  background-color: var(--bg-color);
+  background-image: url("assets/fon.png");
 }
+
 </style>

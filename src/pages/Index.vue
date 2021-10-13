@@ -5,7 +5,6 @@
         v-model="statusSelectVal"
         :options="statusOptions"
     >
-
     </my-select>
   </form>
   <main v-if="!episodes">

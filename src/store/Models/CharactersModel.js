@@ -25,7 +25,7 @@ export function CharacterModel(info) {
   this.name = name;
   this.species = species;
   this.image = image;
-  this.episode = episode.slice(0,5).map((ep) => ep);
+  this.episode = episode.slice(0, 5);
   this.status = status;
   this.url = paths.character.link(id);
 

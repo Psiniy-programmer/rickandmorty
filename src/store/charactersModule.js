@@ -27,7 +27,7 @@ export const charactersModule = {
   actions: {
     async fetchAllCharacters({commit}) {
       commit('setLoading', true);
-      await axios.get(api.characters)
+      await axios.get(api.characters.all)
         .then((res) => {
           commit('setData', res.data);
         })
@@ -38,6 +38,27 @@ export const charactersModule = {
           commit('setLoading', false);
         })
     },
+    async fetchMoreCharacters({state, commit}) {
+      commit('setLoading', true);
+
+      if (state.data?.info.next) {
+        await axios.get(state.data.info.next)
+          .then((res) => {
+            const obj = {
+              info: res.data.info,
+              results: [...state.data.results, ...res.data.results]
+            }
+            commit('setData', obj);
+          })
+          .catch((error) => {
+            commit('setError', error);
+          })
+          .finally(() => {
+            commit('setLoading', false);
+          })
+      }
+
+    }
   },
   namespaced: true
 }

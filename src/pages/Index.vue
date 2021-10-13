@@ -11,6 +11,7 @@
   <main>
     <section v-if="!searchVal">
       <card-list :items="characters?.data?.results"></card-list>
+      <div v-intersection="fetchMoreCharacters" class="observer"/>
     </section>
     <section v-else>
       <card-list :items="searchResult"></card-list>
@@ -25,6 +26,7 @@ import MyInput from "@/components/MyInput";
 import MySelect from "@/components/MySelect";
 import axios from "axios";
 import api from "@/utils/api";
+import {CharacterModel} from "@/store/Models/CharactersModel";
 
 export default {
   name: "Index",
@@ -51,11 +53,17 @@ export default {
   methods: {
     ...mapActions({
       fetchAllCharacters: 'characters/fetchAllCharacters',
-      fetchAllEpisode: 'episode/fetchAllEpisode'
+      fetchAllEpisode: 'episode/fetchAllEpisode',
+      fetchMoreCharacters: 'characters/fetchMoreCharacters'
     }),
     async fetchWithQuery() {
-      await axios.get(api.filterCharacters(this.searchVal, this.statusSelectVal))
-        .then((res) => this.searchResult = res.data.results)
+      await axios.get(api.characters.all, {
+        params: {
+          status: this.statusSelectVal,
+          name: this.searchVal
+        }
+      })
+        .then((res) => this.searchResult = res.data.results.map((character) => new CharacterModel(character)))
         .catch(() => this.searchResult = [])
     }
   },

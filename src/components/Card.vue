@@ -53,13 +53,31 @@ export default {
         return splitted[splitted.length - 1];
       }).join(',')
 
-      await axios.get(api.characterEpisode(epsId))
-          .then((res) => this.episodeNames = res.data.map((ep) => ({
-            url: paths.episode.link(ep.id),
-            name: ep.name,
-            id: ep.id
-          })))
-          .catch(() => this.episodeNames = [])
+      await axios.get(api.characters.episode(epsId))
+          .then((res) => {
+
+            if (Array.isArray(res.data)) {
+              this.episodeNames = res.data.map((ep) => ({
+                url: paths.episode.link(ep.id),
+                name: ep.name,
+                id: ep.id
+              }))
+            } else {
+              this.episodeNames = [
+                {
+                  url: paths.episode.link(res.data.id),
+                  name: res.data.name,
+                  id: res.data.id
+                }
+              ]
+            }
+
+
+          })
+          .catch((err) => {
+            console.log(err)
+            this.episodeNames = []
+          })
     }
   },
   mounted() {
